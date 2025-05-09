@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            transition: margin-left 0.5s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .example {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2980b9;
+        }
+        
+        .note {
+            background-color: #fffde7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #fbc02d;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        /* Side menu styles */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #ecf0f1;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .sidenav a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 28px;
+            margin-left: 50px;
+        }
+        
+        .menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            z-index: 2;
+            color: white;
+            background-color: #2c3e50;
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            header {
+                padding: 15px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#string">String</a>
+        <a href="#pointer">Pointer in C</a>
+        <a href="#dynamic-variable">Dynamic Variable</a>
+        <a href="#file">File Operations</a>
+        <a href="#call-by">Call by Value vs Reference</a>
+        <a href="#pointer-array">Pointer to Array</a>
+        <a href="#string-functions">String Functions</a>
+        <a href="#struct-union">Structure vs Union</a>
+        <a href="#nested-struct">Nested Structure</a>
+        <a href="#struct-array">Structure vs Array</a>
+        <a href="#array-pointers">Array of Pointers</a>
+        <a href="#file-functions">File Handling Functions</a>
+        <a href="#terms">Key Terms</a>
+        <a href="#student-program">Student Structure Program</a>
+    </div>
+
+    <span class="menu-btn" onclick="openNav()">&#9776;</span>
+
+    <div class="container">
+        <header>
+            <h1>C Programming Concepts</h1>
+            <p>Comprehensive guide to key C programming topics</p>
+        </header>
+
+        <section id="string">
+            <h2>What is a String?</h2>
+            <p>In C programming, a string is a sequence of characters terminated with a null character '\0'. Strings are actually one-dimensional array of characters terminated by a null character.</p>
+            
+            <p>Strings are used to store text/characters. For example, "Hello World" is a string of characters.</p>
+            
+            <h3>String Declaration</h3>
+            <p>There are two ways to declare a string in C:</p>
+            
+            <pre><code>// Method 1: Using character array
+char str1[] = "Hello";
+
+// Method 2: Using pointer
+char *str2 = "World";</code></pre>
+            
+            <div class="note">
+                <p><strong>Note:</strong> The null character '\0' is automatically added at the end when you initialize a character array with a string literal.</p>
+            </div>
+        </section>
+
+        <section id="pointer">
+            <h2>Pointer in C</h2>
+            <p>A pointer is a variable that stores the memory address of another variable. Pointers are powerful features of C that allow you to directly manipulate memory.</p>
+            
+            <h3>Pointer Declaration</h3>
+            <pre><code>data_type *pointer_name;</code></pre>
+            
+            <p>Where:</p>
+            <ul>
+                <li><code>data_type</code> is the type of data the pointer points to</li>
+                <li><code>*</code> indicates that the variable is a pointer</li>
+                <li><code>pointer_name</code> is the name of the pointer variable</li>
+            </ul>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int var = 20;   // Actual variable declaration
+    int *ip;        // Pointer variable declaration
+    
+    ip = &var;      // Store address of var in pointer variable
+    
+    printf("Address of var variable: %p\n", &var);
+    printf("Address stored in ip variable: %p\n", ip);
+    printf("Value of *ip variable: %d\n", *ip);
+    
+    return 0;
+}</code></pre>
+            </div>
+            
+            <h3>Pointer Arithmetic</h3>
+            <p>Pointers support arithmetic operations:</p>
+            <ul>
+                <li>Increment (++)</li>
+                <li>Decrement (--)</li>
+                <li>Addition (+)</li>
+                <li>Subtraction (-)</li>
+            </ul>
+        </section>
+
+        <section id="dynamic-variable">
+            <h2>Dynamic Variable</h2>
+            <p>A dynamic variable is a variable whose memory is allocated at runtime (during program execution) rather than at compile time. In C, dynamic memory allocation is done using functions like <code>malloc()</code>, <code>calloc()</code>, <code>realloc()</code>, and <code>free()</code> from the <code>stdlib.h</code> library.</p>
+            
+            <h3>Key Functions</h3>
+            <ul>
+                <li><code>malloc()</code> - Allocates a block of memory</li>
+                <li><code>calloc()</code> - Allocates multiple blocks of memory and initializes them to zero</li>
+                <li><code>realloc()</code> - Reallocates memory to increase or decrease size</li>
+                <li><code>free()</code> - Frees previously allocated memory</li>
+            </ul>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    int *ptr;
+    int n = 5;
+    
+    // Dynamically allocate memory using malloc()
+    ptr = (int*)malloc(n * sizeof(int));
+    
+    if (ptr == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+    
+    // Initialize the array
+    for (int i = 0; i < n; i++) {
+        ptr[i] = i + 1;
+    }
+    
+    // Print the array
+    for (int i = 0; i < n; i++) {
+        printf("%d ", ptr[i]);
+    }
+    
+    // Free the memory
+    free(ptr);
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="file">
+            <h2>What is a File?</h2>
+            <p>A file is a container in computer storage devices used for storing data. Files are used to preserve information even after the program terminates.</p>
+            
+            <h3>File Operations</h3>
+            <p>Basic file operations in C include:</p>
+            
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Function</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Create a file</td>
+                    <td>fopen()</td>
+                    <td>Creates a new file or opens an existing file</td>
+                </tr>
+                <tr>
+                    <td>Open a file</td>
+                    <td>fopen()</td>
+                    <td>Opens an existing file for reading, writing or both</td>
+                </tr>
+                <tr>
+                    <td>Close a file</td>
+                    <td>fclose()</td>
+                    <td>Closes an opened file</td>
+                </tr>
+                <tr>
+                    <td>Read from file</td>
+                    <td>fscanf(), fgetc(), fgets()</td>
+                    <td>Reads data from file</td>
+                </tr>
+                <tr>
+                    <td>Write to file</td>
+                    <td>fprintf(), fputc(), fputs()</td>
+                    <td>Writes data to file</td>
+                </tr>
+                <tr>
+                    <td>Move file pointer</td>
+                    <td>fseek(), rewind()</td>
+                    <td>Changes the position of file pointer</td>
+                </tr>
+                <tr>
+                    <td>Get current position</td>
+                    <td>ftell()</td>
+                    <td>Returns current position of file pointer</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="call-by">
+            <h2>Call by Value and Call by Reference</h2>
+            
+            <h3>Call by Value</h3>
+            <p>In call by value, a copy of the actual parameter's value is passed to the function. Changes made to the parameter inside the function have no effect on the argument.</p>
+            
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+void swap(int x, int y) {
+    int temp = x;
+    x = y;
+    y = temp;
+    printf("Inside swap: x = %d, y = %d\n", x, y);
+}
+
+int main() {
+    int a = 10, b = 20;
+    printf("Before swap: a = %d, b = %d\n", a, b);
+    swap(a, b);
+    printf("After swap: a = %d, b = %d\n", a, b);
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong><br>
+                Before swap: a = 10, b = 20<br>
+                Inside swap: x = 20, y = 10<br>
+                After swap: a = 10, b = 20</p>
+            </div>
+            
+            <h3>Call by Reference</h3>
+            <p>In call by reference, the address of the variable is passed to the function. Changes made to the parameter affect the passed argument.</p>
+            
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+    printf("Inside swap: *x = %d, *y = %d\n", *x, *y);
+}
+
+int main() {
+    int a = 10, b = 20;
+    printf("Before swap: a = %d, b = %d\n", a, b);
+    swap(&a, &b);
+    printf("After swap: a = %d, b = %d\n", a, b);
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong><br>
+                Before swap: a = 10, b = 20<br>
+                Inside swap: *x = 20, *y = 10<br>
+                After swap: a = 20, b = 10</p>
+            </div>
+        </section>
+
+        <section id="pointer-array">
+            <h2>Pointer to Array</h2>
+            <p>A pointer to an array is a pointer that points to the first element of an array. Array name itself acts as a pointer to the first element of the array.</p>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  // Pointer to array
+    
+    printf("Array elements using pointer:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d\n", i, *(ptr + i));
+    }
+    
+    return 0;
+}</code></pre>
+            </div>
+            
+            <h3>Pointer to Multidimensional Array</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int (*ptr)[3] = arr;  // Pointer to 2D array
+    
+    printf("2D array elements using pointer:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", ptr[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="string-functions">
+            <h2>String Functions</h2>
+            <p>C provides several built-in string handling functions in the <code>string.h</code> library. Here are four important ones:</p>
+            
+            <h3>1. strlen() - String Length</h3>
+            <p>Returns the length of the string (number of characters before the null character).</p>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str[] = "Hello World";
+    printf("Length of string: %lu\n", strlen(str));
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong> Length of string: 11</p>
+            </div>
+            
+            <h3>2. strcpy() - String Copy</h3>
+            <p>Copies the source string to the destination string.</p>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char src[] = "Copy this";
+    char dest[20];
+    
+    strcpy(dest, src);
+    printf("Source: %s\n", src);
+    printf("Destination: %s\n", dest);
+    
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong><br>
+                Source: Copy this<br>
+                Destination: Copy this</p>
+            </div>
+            
+            <h3>3. strcat() - String Concatenation</h3>
+            <p>Appends the source string to the destination string.</p>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str1[20] = "Hello";
+    char str2[] = " World";
+    
+    strcat(str1, str2);
+    printf("Concatenated string: %s\n", str1);
+    
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong> Concatenated string: Hello World</p>
+            </div>
+            
+            <h3>4. strcmp() - String Compare</h3>
+            <p>Compares two strings lexicographically.</p>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str1[] = "apple";
+    char str2[] = "banana";
+    
+    int result = strcmp(str1, str2);
+    
+    if (result < 0)
+        printf("'%s' comes before '%s'\n", str1, str2);
+    else if (result > 0)
+        printf("'%s' comes after '%s'\n", str1, str2);
+    else
+        printf("Strings are equal\n");
+    
+    return 0;
+}</code></pre>
+                <p><strong>Output:</strong> 'apple' comes before 'banana'</p>
+            </div>
+        </section>
+
+        <section id="struct-union">
+            <h2>Structure vs Union</h2>
+            <p>Both structures and unions are user-defined data types in C, but they have key differences:</p>
+            
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Structure (struct)</th>
+                    <th>Union (union)</th>
+                </tr>
+                <tr>
+                    <td>Memory Allocation</td>
+                    <td>Each member has its own memory location</td>
+                    <td>All members share the same memory location</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Sum of sizes of all members (plus padding)</td>
+                    <td>Size of the largest member</td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>All members can be accessed at any time</td>
+                    <td>Only one member can be accessed at a time</td>
+                </tr>
+                <tr>
+                    <td>Initialization</td>
+                    <td>All members can be initialized</td>
+                    <td>Only the first member can be initialized</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>When you need to store and access all members</td>
+                    <td>When you need to store only one member at a time</td>
+                </tr>
+            </table>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+// Structure example
+struct Student {
+    char name[50];
+    int age;
+    float marks;
+};
+
+// Union example
+union Data {
+    int i;
+    float f;
+    char str[20];
+};
+
+int main() {
+    printf("Size of struct Student: %lu bytes\n", sizeof(struct Student));
+    printf("Size of union Data: %lu bytes\n", sizeof(union Data));
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="nested-struct">
+            <h2>Nested Structure</h2>
+            <p>A nested structure is a structure within another structure. This allows you to create complex data types by combining simpler ones.</p>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Structure for Address
+struct Address {
+    char street[50];
+    char city[30];
+    char state[30];
+    int pin;
+};
+
+// Structure for Employee with nested Address structure
+struct Employee {
+    char name[50];
+    int emp_id;
+    float salary;
+    struct Address address;  // Nested structure
+};
+
+int main() {
+    // Create an Employee variable
+    struct Employee emp1;
+    
+    // Assign values
+    strcpy(emp1.name, "John Doe");
+    emp1.emp_id = 101;
+    emp1.salary = 50000.0;
+    
+    // Assign values to nested address structure
+    strcpy(emp1.address.street, "123 Main St");
+    strcpy(emp1.address.city, "New York");
+    strcpy(emp1.address.state, "NY");
+    emp1.address.pin = 10001;
+    
+    // Display information
+    printf("Employee Name: %s\n", emp1.name);
+    printf("Employee ID: %d\n", emp1.emp_id);
+    printf("Salary: %.2f\n", emp1.salary);
+    printf("Address: %s, %s, %s - %d\n", 
+           emp1.address.street, 
+           emp1.address.city, 
+           emp1.address.state, 
+           emp1.address.pin);
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="struct-array">
+            <h2>Structure vs Array</h2>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Structure</th>
+                    <th>Array</th>
+                </tr>
+                <tr>
+                    <td>Data Type</td>
+                    <td>Can hold different data types</td>
+                    <td>Holds elements of same data type</td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>Members accessed by name</td>
+                    <td>Elements accessed by index</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Members have separate memory locations</td>
+                    <td>Elements stored in contiguous memory</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Size is sum of all members (plus padding)</td>
+                    <td>Size is (number of elements) × (size of one element)</td>
+                </tr>
+                <tr>
+                    <td>Initialization</td>
+                    <td>Members can be initialized individually</td>
+                    <td>All elements can be initialized at once</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>When you need to group related data of different types</td>
+                    <td>When you need to store multiple items of same type</td>
+                </tr>
+            </table>
+            
+            <h3>Example</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+// Structure example
+struct Point {
+    int x;
+    int y;
+};
+
+// Array example
+int main() {
+    // Structure usage
+    struct Point p1;
+    p1.x = 10;
+    p1.y = 20;
+    printf("Point coordinates: (%d, %d)\n", p1.x, p1.y);
+    
+    // Array usage
+    int numbers[5] = {1, 2, 3, 4, 5};
+    printf("Array elements: ");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="array-pointers">
+            <h2>Array of Pointers</h2>
+            <p>An array of pointers is an array where each element is a pointer to a value of a specific data type. This is useful when you need to store multiple addresses or create arrays of strings.</p>
+            
+            <h3>Example with Integers</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 10, b = 20, c = 30;
+    int *ptr_arr[3];  // Array of 3 integer pointers
+    
+    ptr_arr[0] = &a;
+    ptr_arr[1] = &b;
+    ptr_arr[2] = &c;
+    
+    for (int i = 0; i < 3; i++) {
+        printf("Value at ptr_arr[%d] = %d\n", i, *ptr_arr[i]);
+    }
+    
+    return 0;
+}</code></pre>
+            </div>
+            
+            <h3>Example with Strings</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    char *names[] = {"Alice", "Bob", "Charlie"};  // Array of string pointers
+    
+    for (int i = 0; i < 3; i++) {
+        printf("Name %d: %s\n", i+1, names[i]);
+    }
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="file-functions">
+            <h2>Library Functions for File Handling</h2>
+            <p>C provides several functions in <code>stdio.h</code> for file operations. Here are the key functions with examples:</p>
+            
+            <h3>1. fopen() - Open a File</h3>
+            <pre><code>FILE *fopen(const char *filename, const char *mode);</code></pre>
+            <p>Modes: "r" (read), "w" (write), "a" (append), "r+" (read/write), "w+" (read/write, truncate), "a+" (read/append)</p>
+            
+            <h3>2. fclose() - Close a File</h3>
+            <pre><code>int fclose(FILE *stream);</code></pre>
+            
+            <h3>3. fprintf() - Write Formatted Data to File</h3>
+            <pre><code>int fprintf(FILE *stream, const char *format, ...);</code></pre>
+            
+            <h3>4. fscanf() - Read Formatted Data from File</h3>
+            <pre><code>int fscanf(FILE *stream, const char *format, ...);</code></pre>
+            
+            <h3>5. fgetc() - Read a Character from File</h3>
+            <pre><code>int fgetc(FILE *stream);</code></pre>
+            
+            <h3>6. fputc() - Write a Character to File</h3>
+            <pre><code>int fputc(int char, FILE *stream);</code></pre>
+            
+            <h3>7. fgets() - Read a String from File</h3>
+            <pre><code>char *fgets(char *str, int n, FILE *stream);</code></pre>
+            
+            <h3>8. fputs() - Write a String to File</h3>
+            <pre><code>int fputs(const char *str, FILE *stream);</code></pre>
+            
+            <h3>Example: File Read/Write</h3>
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    FILE *file;
+    char data[100];
+    
+    // Writing to a file
+    file = fopen("example.txt", "w");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+    fprintf(file, "Hello, File Handling in C!\n");
+    fclose(file);
+    
+    // Reading from a file
+    file = fopen("example.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+    fgets(data, 100, file);
+    printf("Data from file: %s", data);
+    fclose(file);
+    
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="terms">
+            <h2>Key Terms Explained</h2>
+            
+            <h3>Pointer</h3>
+            <p>A pointer is a variable that stores the memory address of another variable. Pointers provide direct access to memory locations and are used for dynamic memory allocation, array handling, and function arguments.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li>Declaration: <code>int *ptr;</code></li>
+                <li>Address operator: <code>&</code> (gets address of a variable)</li>
+                <li>Dereference operator: <code>*</code> (accesses value at pointer address)</li>
+                <li>Pointer arithmetic: Adding/subtracting integers to pointers</li>
+            </ul>
+            
+            <h3>Structures</h3>
+            <p>A structure is a user-defined data type that allows grouping of variables of different types under a single name. Structures are used to represent records or complex data entities.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li>Defined using <code>struct</code> keyword</li>
+                <li>Members can be of different data types</li>
+                <li>Members accessed using dot (.) operator</li>
+                <li>Supports nesting (structures within structures)</li>
+            </ul>
+            
+            <h3>Typedef</h3>
+            <p>The <code>typedef</code> keyword is used to create an alias name for existing data types. It's often used with structures to simplify syntax.</p>
+            <div class="example">
+                <pre><code>typedef struct {
+    char name[50];
+    int age;
+} Person;
+
+// Now we can use Person directly
+Person p1;
+strcpy(p1.name, "Alice");
+p1.age = 25;</code></pre>
+            </div>
+            
+            <h3>Dynamic Memory Allocation</h3>
+            <p>Dynamic memory allocation is the process of allocating memory at runtime rather than at compile time. This allows programs to request memory when needed and release it when no longer needed.</p>
+            <p><strong>Functions:</strong></p>
+            <ul>
+                <li><code>malloc()</code> - Allocates memory block</li>
+                <li><code>calloc()</code> - Allocates and initializes memory block</li>
+                <li><code>realloc()</code> - Resizes previously allocated block</li>
+                <li><code>free()</code> - Releases allocated memory</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre><code>int *arr = (int*)malloc(5 * sizeof(int));  // Array of 5 integers
+if (arr != NULL) {
+    // Use the array
+    free(arr);  // Release memory when done
+}</code></pre>
+        </section>
+
+        <section id="student-program">
+            <h2>Student Structure Program</h2>
+            <p>This program demonstrates the use of structures to store student information and calculate the average of total marks.</p>
+            
+            <div class="example">
+                <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Define Student structure
+struct Student {
+    char name[50];
+    int age;
+    float total_marks;
+};
+
+int main() {
+    struct Student students[2];
+    float sum = 0, average;
+    
+    // Input data for two students
+    for (int i = 0; i < 2; i++) {
+        printf("\nEnter details for student %d:\n", i+1);
+        
+        printf("Name: ");
+        fgets(students[i].name, 50, stdin);
+        students[i].name[strcspn(students[i].name, "\n")] = '\0';  // Remove newline
+        
+        printf("Age: ");
+        scanf("%d", &students[i].age);
+        
+        printf("Total Marks: ");
+        scanf("%f", &students[i].total_marks);
+        
+        getchar();  // To consume the newline left by scanf
+        
+        sum += students[i].total_marks;
+    }
+    
+    // Calculate average
+    average = sum / 2;
+    
+    // Display student information
+    printf("\nStudent Information:\n");
+    for (int i = 0; i < 2; i++) {
+        printf("\nStudent %d:\n", i+1);
+        printf("Name: %s\n", students[i].name);
+        printf("Age: %d\n", students[i].age);
+        printf("Total Marks: %.2f\n", students[i].total_marks);
+    }
+    
+    // Display average
+    printf("\nAverage of Total Marks: %.2f\n", average);
+    
+    return 0;
+}</code></pre>
+            </div>
+            
+            <h3>Program Explanation</h3>
+            <ol>
+                <li>We define a <code>Student</code> structure with three members: <code>name</code>, <code>age</code>, and <code>total_marks</code>.</li>
+                <li>In <code>main()</code>, we create an array of two <code>Student</code> structures.</li>
+                <li>We use a loop to input data for each student, using <code>fgets()</code> for the name to handle spaces.</li>
+                <li>We calculate the sum of marks while inputting data.</li>
+                <li>After input, we calculate the average of the total marks.</li>
+                <li>We display all student information and the calculated average.</li>
+            </ol>
+        </section>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.body.style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>
